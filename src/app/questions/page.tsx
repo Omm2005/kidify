@@ -10,7 +10,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion"
-import { Button } from "~/components/ui/button"
 import { getServerAuthSession } from "~/server/auth"
 import db from "~/server/db"
 

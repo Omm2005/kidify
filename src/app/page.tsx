@@ -1,5 +1,6 @@
 import Link from "next/link";
 import InputForm from "~/components/InputForm";
+import LoginWithGoogle from "~/components/LoginWithGoogle";
 import Navbar from "~/components/Navbar";
 import { getServerAuthSession } from "~/server/auth";
 
@@ -20,7 +21,13 @@ export default async function HomePage() {
           A platform to explain complex topics in simple words. It&apos;s like you are explaining to a 5 year old.
         </p>
         </div>
-          <InputForm />
+        {
+          session?.user ?(
+            <InputForm />
+          ) : (
+            <LoginWithGoogle />
+          )
+        }
       </div>
       <div className="text-sm flex flex-col justify-center items-center text-center">
         <p>
