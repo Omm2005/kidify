@@ -48,7 +48,7 @@ const page = async({} : pageProps) => {
             </div>
             <Accordion type="single" collapsible className="w-full">
                 {
-                    queries.map((query , index) => {
+                    queries.reverse().map((query , index) => {
                         return (
                             <AccordionItem value={`${index}`} key={index}>
                             <AccordionTrigger className="text-lg font-bold">{query.question}</AccordionTrigger>

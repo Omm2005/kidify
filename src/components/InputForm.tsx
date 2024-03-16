@@ -23,7 +23,7 @@ const InputForm = ({}: InputFormProps) => {
     });
   };
 
-  if (messages && messages.length >= 2) {
+  if ((messages && messages.length >= 2) && isLoading === false) {
     QuestionToDB(messages[0]!.content, messages[1]!.content);
   }
 

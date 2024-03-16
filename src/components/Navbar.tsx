@@ -3,6 +3,7 @@ import { ModeToggle } from "./ModeToggle"
 import UserAcountNav from "./userAuthNav"
 import Link from "next/link"
 import LoginWithGoogle from "./LoginWithGoogle"
+import { Button } from "./ui/button"
 
 interface NavbarProps {
   user: User | undefined
@@ -20,6 +21,16 @@ const Navbar = ({user} : NavbarProps) => {
                 </Link>
             </div>
             <div className="flex gap-2">
+                {
+                    user && (
+                        
+                        <Link href='/questions'>
+                <Button variant='link' className="text-foreground">
+                Your Questions
+                </Button>
+                </Link>
+                    )
+                }
                 <ModeToggle />
                 <div>
                     {
