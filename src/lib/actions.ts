@@ -3,49 +3,43 @@
 import { getServerAuthSession } from "~/server/auth"
 import db from "~/server/db"
 
-export const QuestionToDB = async (question: string , answer: string) => {
+export const CreateQuery = async (question: string , answer: string) => {
     const session = await getServerAuthSession()
     if(!session) {
         throw new Error("You must be logged in to do this")
     }
 
-    const isThere = await db.query.findFirst({
+    const answerExists = await db.query.findFirst({
         where: {
             question: question,
+            userId: session?.user.id
         }
     })
 
-    if(!isThere) {
-
+    if(!answerExists) {
         const response  = await db.query.create({
             data: {
                 question: question,
                 answer: answer,
-                userId: session?.user.id
+                userId: session?.user.id,
             }
         })
         return response
+    } else {
+        return console.log("Question already exists")
     }
     }
 
-    export const deleteQuestion = async (question: string) => {
+    export const deleteQuestion = async (id: any) => {
         const session = await getServerAuthSession()
         if(!session) {
             throw new Error("You must be logged in to do this")
         }
 
-        const query = await db.query.findFirst({
-            where: {
-                question: question,
-                userId: session?.user.id
-            }
-        })
-
         const response = await db.query.delete({
             where: {
-                question: question,
                 userId: session?.user.id,
-                id: query?.id
+                id: id
             }
         })
         return response
@@ -62,6 +56,7 @@ export const QuestionToDB = async (question: string , answer: string) => {
                 userId: session.user.id
             },
             select: {
+                id: true,
                 question: true,
                 answer: true
             }

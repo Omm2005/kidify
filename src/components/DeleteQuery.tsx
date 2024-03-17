@@ -7,14 +7,14 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 
 interface DeleteQueryProps {
-  question: string
+  id: string
 }
 
-const DeleteQuery = ({question} : DeleteQueryProps) => {
+const DeleteQuery = ({id} : DeleteQueryProps) => {
     const router = useRouter()
     const handleDelete = async() => {
         try {
-           await deleteQuestion(question).then(() => {
+           await deleteQuestion(id).then(() => {
                 toast.success("Question Deleted")
                 router.refresh()
               })

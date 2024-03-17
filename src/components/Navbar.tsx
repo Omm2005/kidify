@@ -45,7 +45,7 @@ const Navbar = ({ user }: NavbarProps) => {
             </Link>
           ))}
         <ModeToggle />
-        <div>{user ? <UserAcountNav user={user} /> : <LoginWithGoogle />}</div>
+        <div>{user ? <UserAcountNav user={user} path={path} /> : <LoginWithGoogle />}</div>
       </div>
     </motion.div>
   );

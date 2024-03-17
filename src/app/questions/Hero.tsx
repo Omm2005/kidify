@@ -11,12 +11,16 @@ import SadKidify from "~/../public/Kidify-sad.jpg"
 
 interface HeroProps {
   queries: {
-    question: string
+    id: string,
+    question: string,
     answer: string
   }[]
 }
 
 const Hero = ({queries} : HeroProps) => {
+
+  const reversedQueries = queries.reverse()
+
   return (
     <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -31,9 +35,8 @@ const Hero = ({queries} : HeroProps) => {
         Your Questions
     </h1>
     </div>
-    <Accordion type="single" collapsible className="w-full">
       {
-        queries.length === 0 && (
+        reversedQueries.length === 0 && (
           <div className="flex flex-col gap-3 text-center justify-center items-center">
             <Image src={SadKidify} width={200} height={200} alt="Sad Kidify" className="rounded-3xl"  />
             <h1 className="text-3xl font-bold text-muted-foreground">
@@ -46,11 +49,12 @@ const Hero = ({queries} : HeroProps) => {
           </div>
         )
       }
+            <Accordion type="single" collapsible className="w-full">
         {
-            queries.reverse().map((query , index) => {
+            reversedQueries.map((query , index) => {
                 return (
                   <div className="flex gap-2 w-full justify-start items-center min-h-full" key={index}>
-                      <DeleteQuery question={query.question} />
+                      <DeleteQuery id={query.id} />
                     <AccordionItem value={`${index}`} key={index} className="w-full">
                     <AccordionTrigger className="text-lg font-bold group">
                       <div className="text-start">

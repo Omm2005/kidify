@@ -15,9 +15,10 @@ import Link from "next/link";
 
 interface UserAcountNavProps {
   user: User;
+  path: string;
 }
 
-const UserAcountNav = ({ user }: UserAcountNavProps) => {
+const UserAcountNav = ({ user , path }: UserAcountNavProps) => {
   return (
     <>
       <div className="md:flex hidden gap-2 rounded-full bg-destructive text-destructive-foreground pl-3">
@@ -75,7 +76,11 @@ const UserAcountNav = ({ user }: UserAcountNavProps) => {
           <DropdownMenuSeparator className="flex md:hidden" />
 
           <DropdownMenuItem asChild className="flex md:hidden">
+          {path === '/questions' ? (
+            <Link href="/">Ask a Question</Link>
+          ) : (
             <Link href="/questions">Questions</Link>
+            ) }
           </DropdownMenuItem>
 
           <DropdownMenuSeparator />

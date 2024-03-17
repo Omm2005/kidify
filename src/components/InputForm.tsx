@@ -3,7 +3,7 @@
 import { useChat } from "ai/react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { QuestionToDB } from "~/lib/actions";
+import { CreateQuery } from "~/lib/actions";
 import Markdown from "./Markdown";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -16,20 +16,17 @@ const InputForm = ({}: InputFormProps) => {
   const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } =
     useChat({
       api: "api/genai",
+      onFinish: async(data) => await CreateQuery(input + '---' + years, data.content).then(() => toast.success("Query Saved Successfully and Completed!")).catch(() => toast.error("Error Saving Query!")),
     });
 
-  const OnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    handleSubmit(event, {
-      data: {
-        prompt: input + '---' + years,
-      },
-    });
-  };
-
-  if ((messages && messages.length >= 2) && isLoading === false) {
-    QuestionToDB(messages[0]!.content + "---" + years, messages[1]!.content);
-  }
+    const OnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      handleSubmit(event, {
+        data: {
+          prompt: input + '---' + years,
+        },
+      });
+    };
 
   const handleAddOneYear = () => {
       setYears(years + 1);
@@ -45,7 +42,7 @@ const InputForm = ({}: InputFormProps) => {
     <>
               <div className="flex flex-col gap-3 text-center justify-center items-center">
         <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-[5rem]">
-          Explain Like I am <Button variant='outline' size='icon' className='align-middle' disabled={years <= 1} onClick={handleSubOneYear}> <ChevronLeft /> </Button>{' '} {years} {' '} <Button variant='outline' size='icon' className='align-middle' disabled={years >= 100} onClick={handleAddOneYear}> <ChevronRight /> </Button>
+          Explain Like I am <Button variant='outline' size='icon' className='align-middle' disabled={years <= 1} onClick={handleSubOneYear}> <ChevronLeft /> </Button>{' '} <Input value={years} type="number" onChange={(e) => { setYears(((parseInt(e.target.value) >= 101 || parseInt(e.target.value) <= 0) || e.target.value === '') ? 5 : parseInt(e.target.value) )}} className="w-40 text-center h-fit text-7xl inline-block" min={1} max={100} /> {' '} <Button variant='outline' size='icon' className='align-middle' disabled={years >= 100} onClick={handleAddOneYear}> <ChevronRight /> </Button>
         </h1>
         <p className="text-muted-foreground">
           A platform to explain complex topics in simple words. It&apos;s like you are explaining to a {years} years old.
