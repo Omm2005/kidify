@@ -41,9 +41,10 @@ const InputForm = ({}: InputFormProps) => {
   return (
     <>
               <div className="flex flex-col gap-3 text-center justify-center items-center">
+<div>
         <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-[5rem]">
-          Explain Like I am <Button variant='outline' size='icon' className='align-middle' disabled={years <= 1} onClick={handleSubOneYear}> <ChevronLeft /> </Button>{' '} <Input value={years} type="number" onChange={(e) => { setYears(((parseInt(e.target.value) >= 101 || parseInt(e.target.value) <= 0) || e.target.value === '') ? 5 : parseInt(e.target.value) )}} className="w-40 text-center h-fit text-7xl inline-block" min={1} max={100} /> {' '} <Button variant='outline' size='icon' className='align-middle' disabled={years >= 100} onClick={handleAddOneYear}> <ChevronRight /> </Button>
-        </h1>
+          Explain Like I am </h1>
+<div><Button variant='outline' size='icon' className='align-middle' disabled={years <= 1} onClick={handleSubOneYear}> <ChevronLeft /> </Button>{' '} <Input value={years} type="number" onChange={(e) => { setYears(((parseInt(e.target.value) >= 101 || parseInt(e.target.value) <= 0) || e.target.value === '') ? 5 : parseInt(e.target.value) )}} className="w-40 text-center h-fit text-7xl inline-block" min={1} max={100} /> {' '} <Button variant='outline' size='icon' className='align-middle' disabled={years >= 100} onClick={handleAddOneYear}> <ChevronRight /> </Button> </div> </div>
         <p className="text-muted-foreground">
           A platform to explain complex topics in simple words. It&apos;s like you are explaining to a {years} years old.
         </p>
