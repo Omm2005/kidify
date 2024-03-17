@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "./theme-provider";
 import { Metadata } from "next";
+import BuyMeACoffee from "~/components/BuyMeACoffee";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,6 +48,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
         {children}
+        <BuyMeACoffee />
       </ThemeProvider>
       </body>
     </html>

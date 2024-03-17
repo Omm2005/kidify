@@ -5,9 +5,12 @@ import { Button } from "./ui/button";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 
-interface LoginWithGoogleProps {}
+interface LoginWithGoogleProps {
+  size?: "sm" | "lg" | "default" | "icon";
+  wide?: boolean;
+}
 
-const LoginWithGoogle = ({}: LoginWithGoogleProps) => {
+const LoginWithGoogle = ({size , wide}: LoginWithGoogleProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const LoginWithGoogle = async () => {
@@ -22,7 +25,7 @@ const LoginWithGoogle = ({}: LoginWithGoogleProps) => {
       setIsLoading(false);
     }
   };
-  return <Button onClick={LoginWithGoogle}>Get Started</Button>;
+  return <Button size={size ? size : 'default'} onClick={LoginWithGoogle} className={`${wide && 'md:w-1/3 w-full'} md:text-base text-sm`}>Get Started</Button>;
 };
 
 export default LoginWithGoogle;

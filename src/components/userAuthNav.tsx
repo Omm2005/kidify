@@ -1,75 +1,98 @@
-'use client'
+"use client";
 
-import { User } from "next-auth"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "~/components/ui/dropdown-menu"
-import Image from "next/image"
-import { signOut } from "next-auth/react"
-import { LogOut } from "lucide-react"
-import Link from "next/link"
+import { User } from "next-auth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
+import Image from "next/image";
+import { signOut } from "next-auth/react";
+import { LogOut } from "lucide-react";
+import Link from "next/link";
 
 interface UserAcountNavProps {
-  user : User,
+  user: User;
 }
 
-const UserAcountNav = ({
-    user
-} : UserAcountNavProps) => {
-
-  return (  
-    <DropdownMenu>
-        <DropdownMenuTrigger asChild className='flex overflow-visible'>
-            <div className="relative cursor-pointer gap-1 justify-center items-center">
-                <Image
-                src={user.image!}
-                width={40}
-                alt="Image"
-                height={40}
-                className="rounded-full" 
-                />
+const UserAcountNav = ({ user }: UserAcountNavProps) => {
+  return (
+    <>
+      <div className="md:flex hidden gap-2 rounded-full bg-destructive text-destructive-foreground pl-3">
+      <div
+              className="flex w-full items-center justify-between cursor-pointer"
+              onClick={() => signOut()}
+            >
+              <p>Log Out</p>
             </div>
+        <Image
+          src={user.image!}
+          width={40}
+          height={40}
+          className="rounded-full"
+          alt="User Image"
+        />
+      </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          asChild
+          className="flex overflow-visible md:hidden"
+        >
+          <div className="relative cursor-pointer items-center justify-center gap-1">
+            <Image
+              src={user.image!}
+              width={40}
+              alt="Image"
+              height={40}
+              className="rounded-full"
+            />
+          </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-background border-2 border-muted-foreground w-60" align='end'>
-            <div className="flex items-center justify-start gap-2 p-2">
-                <div className="flex items-center gap-3 space-y-0.5 leading-none">
-                <Image
+        <DropdownMenuContent
+          className="w-60 border-2 border-muted-foreground bg-background"
+          align="end"
+        >
+          <div className="flex items-center justify-start gap-2 p-2">
+            <div className="flex items-center gap-3 space-y-0.5 leading-none">
+              <Image
                 src={user.image!}
                 width={40}
                 alt="Image"
                 height={40}
                 className="rounded-full"
-                />
-                <div>
-                    <p>
-                        {user.name}
-                    </p>
-                    <p className="font-medium text-sm text-muted-foreground">
-                        { user.email }
-                    </p>
-                </div>
-                </div>
+              />
+              <div>
+                <p>{user.name}</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  {user.email}
+                </p>
+              </div>
             </div>
+          </div>
 
-            <DropdownMenuSeparator />
+          <DropdownMenuSeparator className="flex md:hidden" />
 
-            <DropdownMenuItem asChild>
-                    <Link href='/questions'>
-                        Questions
-                    </Link>
-            </DropdownMenuItem>
+          <DropdownMenuItem asChild className="flex md:hidden">
+            <Link href="/questions">Questions</Link>
+          </DropdownMenuItem>
 
-            <DropdownMenuSeparator />
+          <DropdownMenuSeparator />
 
-            <DropdownMenuItem asChild>
-                <div className="w-full flex items-center justify-between hover:bg-red-700" onClick={() => signOut()}>
-                    <p>
-                        Log Out
-                    </p>
-                    <LogOut className="h-4 w-4" />
-                </div>
-            </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <div
+              className="flex w-full items-center justify-between hover:bg-red-700"
+              onClick={() => signOut()}
+            >
+              <p>Log Out</p>
+              <LogOut className="h-4 w-4" />
+            </div>
+          </DropdownMenuItem>
         </DropdownMenuContent>
-    </DropdownMenu>
-    )
-}
+      </DropdownMenu>
+    </>
+  );
+};
 
-export default UserAcountNav
+export default UserAcountNav;
