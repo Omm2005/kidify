@@ -55,10 +55,14 @@ export const CreateQuery = async (question: string , answer: string) => {
             where: {
                 userId: session.user.id
             },
+            orderBy:{
+                createdAt: 'desc'
+            },
             select: {
                 id: true,
                 question: true,
-                answer: true
+                answer: true,
+                createdAt: true
             }
         })
         return queries

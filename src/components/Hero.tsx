@@ -4,24 +4,29 @@ import { User } from "next-auth";
 import InputForm from "./InputForm";
 import LoginWithGoogle from "./LoginWithGoogle";
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
+import Link from "next/link";
+import ProductHunt from "./ProductHunt";
 
 interface HeroProps {
   user: User | undefined;
 }
 
 const Hero = ({user} : HeroProps) => {
+
   return (
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
         transition={{ duration: 0.3 , delay: 0.5 }} 
-    className="container flex flex-col items-center justify-center gap-12 px-4 py-16 "
+    className="container flex flex-col items-center justify-center gap-12 px-4 py-10 "
     >
     {
       !user && (
 
         <div className="flex flex-col gap-3 text-center justify-center items-center">
+          <ProductHunt />
     <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-[5rem]">
       Explain Like I am 5
     </h1>
