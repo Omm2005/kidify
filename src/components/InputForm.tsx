@@ -8,7 +8,6 @@ import Markdown from "./Markdown";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
-import Link from "next/link";
 import ProductHunt from "./ProductHunt";
 
 interface InputFormProps {
