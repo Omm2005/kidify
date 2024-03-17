@@ -2,6 +2,7 @@
 import { ChevronLeftIcon } from "lucide-react"
 import Link from "next/link"
 import { redirect } from "next/navigation"
+import DeleteQuery from "~/components/DeleteQuery"
 import Markdown from "~/components/Markdown"
 import Navbar from "~/components/Navbar"
 import {
@@ -47,15 +48,37 @@ const page = async({} : pageProps) => {
             </h1>
             </div>
             <Accordion type="single" collapsible className="w-full">
+              {
+                queries.length === 0 && (
+                  <div className="flex flex-col gap-3 text-center justify-center items-center">
+                    <h1 className="text-3xl font-bold text-muted-foreground">
+                      No Questions Asked
+                    </h1>
+                    <Link href="/" className="flex items-center gap-2 text-primary hover:underline">
+                        <ChevronLeftIcon size={20} />
+                        Ask a Question
+                    </Link>
+                  </div>
+                )
+              }
                 {
                     queries.reverse().map((query , index) => {
                         return (
-                            <AccordionItem value={`${index}`} key={index}>
-                            <AccordionTrigger className="text-lg font-bold">{query.question}</AccordionTrigger>
+                          <div className="flex gap-2 w-full justify-start items-center" key={index}>
+                              <DeleteQuery question={query.question} />
+                            <AccordionItem value={`${index}`} key={index} className="w-full">
+                            <AccordionTrigger className="text-lg font-bold">
+                              <div suppressHydrationWarning className="flex items-center w-full">
+                                <p>
+                              {'Explain Like I am ' + query.question.split('---')[1] + ': ' + query.question.split('---')[0]}
+                                </p>
+                              </div>
+                            </AccordionTrigger>
                             <AccordionContent>
                                 <Markdown text={query.answer} />
                             </AccordionContent>
                           </AccordionItem>
+                          </div>
                         )
                     } )
                 }

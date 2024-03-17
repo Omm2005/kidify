@@ -13,7 +13,10 @@ export default async function HomePage() {
         <Navbar user={session?.user} />
       </div>
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <div className="flex flex-col gap-3 text-center justify-center items-center">
+        {
+          !session?.user && (
+
+            <div className="flex flex-col gap-3 text-center justify-center items-center">
         <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-[5rem]">
           Explain Like I am 5
         </h1>
@@ -21,6 +24,8 @@ export default async function HomePage() {
           A platform to explain complex topics in simple words. It&apos;s like you are explaining to a 5 year old.
         </p>
         </div>
+          ) 
+        }
         {
           session?.user ?(
             <InputForm />
