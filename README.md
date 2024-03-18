@@ -2,8 +2,9 @@
 <h1 align="center">Kidify-it</h1>
 <img src="https://utfs.io/f/af1c5a9d-0e02-4764-9bec-5272671f0a1d-ipq0ei.jpg" alt="Kidify-it" align="center" width="80" height="80">
 <br>
-A platform to explain complex topics in simple words. It's like you are explaining to a 5 years old.
-<img src="https://omm.needs.rest/105shots_so.png" alt="Kidify-it" width="500" height="500">
+A platform to explain complex topics in simple words. It's like you are explaining to a 5 years old. 
+  
+<img src="https://utfs.io/f/0656b760-a1ca-4534-9ec4-96e507973cb7-5pph7s.png" alt="Kidify-it" width="500" height="500">
 </div>
 
 ***
