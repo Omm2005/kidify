@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "./theme-provider";
 import { Metadata } from "next";
 import BuyMeACoffee from "~/components/BuyMeACoffee";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,6 +50,7 @@ export default function RootLayout({
           >
         {children}
         <BuyMeACoffee />
+        <Analytics />
       </ThemeProvider>
       </body>
     </html>
